@@ -36,7 +36,7 @@ I pesi gzip sono stime sugli artefatti di build. Compressione HTTP e cache dipen
 ## Verifiche funzionali
 
 - Build statica completa senza GLB. ESLint, diagnostica Astro/TypeScript strict e cinque test Vitest superati.
-- Screenshot in Chrome a 1440 × 900 e 390 × 844. Verificati ingrandimento e chiusura con Escape, navigazione mobile, voci servizi, FAQ e apertura della nota demo. [Screenshot](screenshots)
+- Screenshot in Chrome a 1440 × 900 e 390 × 844. Verificati ingrandimento e chiusura con Escape, navigazione mobile, voci servizi, FAQ e apertura della nota demo.
 - A 320 px con JavaScript disabilitato, verificati assenza di overflow orizzontale, accesso alla prenotazione dal menu e apertura della nota informativa.
 - Sul percorso di fallback sono state controllate l’assenza di canvas e di richieste al GLB e al bundle della scena.
 - Con un GLB tecnico temporaneo servito in memoria, verificati creazione del canvas, scroll nel manifesto, rilascio al cambio di preferenza di movimento e successiva riattivazione. Una risposta binaria danneggiata riporta al poster. La fixture contiene un triangolo condiviso tra nodi e resta esclusa dagli asset pubblici.

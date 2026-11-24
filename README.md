@@ -58,5 +58,3 @@ Importare il repository con il preset **Astro**, scegliere Node 24, comando di b
 - [Architettura](docs/ARCHITECTURE.md) e [linee guida editoriali](docs/CONTENT_GUIDELINES.md)
 - [Contratto Blender](docs/3D_INTEGRATION.md) e [piano delle animazioni](docs/ANIMATION_PLAN.md)
 - [Budget e misure](docs/PERFORMANCE_BUDGET.md) e [prossimi passi](docs/ROADMAP.md)
-- [Screenshot desktop](docs/screenshots/desktop.png) e [mobile](docs/screenshots/mobile.png)
-- [Pagina completa desktop](docs/screenshots/desktop-pagina.png) e [mobile](docs/screenshots/mobile-pagina.png)
