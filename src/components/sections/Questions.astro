@@ -1,0 +1,26 @@
+---
+import Plate from '../ui/Plate.astro';
+import { editorial } from '../../config/editorial';
+import { faq } from '../../config/faq';
+const { questions } = editorial;
+---
+
+<section class="questions" id="domande" aria-labelledby="questions-title">
+  <div class="questions-head">
+    <p class="kicker">{questions.label}</p>
+    <h2 id="questions-title">{questions.title}</h2>
+    <figure class="questions-plate">
+      <Plate image={questions.image} sizes="(max-width: 760px) 100vw, 30vw" />
+    </figure>
+  </div>
+  <dl class="dialogue">
+    {
+      faq.map((item) => (
+        <div>
+          <dt>{item.title}</dt>
+          <dd>{item.text}</dd>
+        </div>
+      ))
+    }
+  </dl>
+</section>

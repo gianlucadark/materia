@@ -1,0 +1,26 @@
+$mobile: 47.5rem;
+$tablet: 62rem;
+:root {
+  // Colours sampled from the set: paper, lime-plaster wall, ash table, dark river stone,
+  // avocado stone. Ink and soft text keep at least 7:1 and 4.5:1 on paper and linen.
+  --paper: #f4efe6;
+  --linen: #e8dfd0;
+  --wall: #d7cec1;
+  --ink: #24201b;
+  --soft: #5a5146;
+  --rule: #cbbfae;
+  --stone: #313a2b;
+  --stone-hover: #44503b;
+  --pit: #84401f;
+  --serif: 'Newsreader', 'Iowan Old Style', Georgia, serif;
+  --gutter: clamp(1.25rem, 5vw, 6rem);
+  --outer: max(var(--gutter), calc((100vw - 90rem) / 2));
+  --section: clamp(5rem, 10vw, 10rem);
+  --header: 5rem;
+  --index-height: 3.5rem;
+  --z-header: 3;
+  --z-skip: 6;
+  --fast: 180ms;
+  --slow: 480ms;
+  --ease: cubic-bezier(0.2, 0.72, 0.25, 1);
+}

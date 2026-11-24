@@ -1,0 +1,63 @@
+---
+import { seo } from '../config/seo';
+import { branding } from '../config/branding';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import '../styles/global.scss';
+const canonical = seo.siteUrl
+  ? new URL(Astro.url.pathname, seo.siteUrl).href
+  : undefined;
+---
+
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#EFE9DF" />
+    <title>{seo.title}</title>
+    <meta name="description" content={seo.description} />
+    <meta
+      name="robots"
+      content={seo.indexable ? 'index,follow' : 'noindex,follow'}
+    />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content="website" /><meta
+      property="og:locale"
+      content={seo.locale}
+    />
+    <meta property="og:site_name" content={branding.name} /><meta
+      property="og:title"
+      content={seo.title}
+    />
+    <meta property="og:description" content={seo.description} />
+    {
+      canonical && (
+        <>
+          <>
+            <meta property="og:url" content={canonical} />
+            <meta
+              property="og:image"
+              content={new URL(seo.socialImage, canonical).href}
+            />
+          </>
+        </>
+      )
+    }
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      href="/fonts/newsreader-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+  </head>
+  <body
+    ><a class="skip" href="#contenuto">Vai al contenuto</a><Header /><main
+      id="contenuto"
+    >
+      <slot />
+    </main><Footer /></body
+  >
+</html>

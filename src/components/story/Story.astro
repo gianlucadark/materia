@@ -1,0 +1,120 @@
+---
+import { existsSync, readdirSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { editorial } from '../../config/editorial';
+import { professional } from '../../config/professional';
+
+const { story } = editorial;
+const list = (set: 'desktop' | 'mobile') => {
+  const dir = resolve('public', 'story', set);
+  return existsSync(dir)
+    ? readdirSync(dir)
+        .filter((f) => f.endsWith('.webp'))
+        .sort()
+    : [];
+};
+const frames = { desktop: list('desktop'), mobile: list('mobile') };
+const first = (set: 'desktop' | 'mobile') =>
+  frames[set][0] ? `/story/${set}/${frames[set][0]}` : undefined;
+const roman = ['I', 'II', 'III', 'IV', 'V', 'VI'];
+// Last frame of the Blender sequence (the finished sculpture).
+const lastFrame = 96;
+---
+
+<section
+  class="story"
+  id="storia"
+  aria-labelledby="story-title"
+  data-frames={JSON.stringify(frames)}
+  data-notes={JSON.stringify(story.annotations)}
+  data-last-frame={lastFrame}
+>
+  <div class="story-stage">
+    <picture>
+      {
+        first('mobile') && (
+          <source media="(max-aspect-ratio: 5/6)" srcset={first('mobile')} />
+        )
+      }
+      <img
+        class="story-poster"
+        src={first('desktop') ?? '/images/story-final-1600.webp'}
+        alt={story.poster}
+        width="1600"
+        height="900"
+        fetchpriority="high"
+        decoding="async"
+      />
+    </picture>
+    <canvas class="story-canvas" aria-hidden="true"></canvas>
+    <svg class="story-notes" aria-hidden="true" focusable="false"></svg>
+  </div>
+  <div class="story-chapters">
+    <header
+      class="story-chapter story-opening"
+      data-frame="1"
+      data-align="left"
+      data-captions="free"
+    >
+      <div class="story-card">
+        <p class="story-kicker">
+          <a href="#chi-sono">{professional.name}</a>, {
+            professional.role.toLowerCase()
+          }
+        </p>
+        <h1 id="story-title">
+          {story.title}
+          <em>{story.titleEnd}</em>
+        </h1>
+        <p class="story-lead">{story.lead}</p>
+        <a class="story-cue" href="#capitolo-1">{story.cue}</a>
+      </div>
+    </header>
+    {
+      story.chapters.map((chapter, i) => (
+        <article
+          class="story-chapter"
+          id={`capitolo-${i + 1}`}
+          data-align={chapter.align}
+          data-frame={chapter.frame}
+          data-captions={chapter.captions}
+          aria-labelledby={`capitolo-${i + 1}-titolo`}
+        >
+          <div class="story-card">
+            <p class="story-step">
+              <span>{roman[i]}</span> {chapter.step}
+            </p>
+            <h2 id={`capitolo-${i + 1}-titolo`}>{chapter.title}</h2>
+            <p>{chapter.text}</p>
+            {i === story.chapters.length - 1 && (
+              <>
+                <p class="story-sign">{professional.firstName}</p>
+                <a class="button" href="#prenota">
+                  {story.action}
+                </a>
+              </>
+            )}
+          </div>
+        </article>
+      ))
+    }
+  </div>
+  <nav class="method-index" aria-label={story.methodLabel}>
+    <i aria-hidden="true"></i>
+    {
+      story.chapters.map((chapter, i) => (
+        <a href={`#capitolo-${i + 1}`}>
+          <span>{roman[i]}</span> {chapter.step}
+        </a>
+      ))
+    }
+  </nav>
+</section>
+<script>
+  import { initStory } from '../../lib/story/player';
+  const root = document.querySelector<HTMLElement>('.story');
+  const run = () => root && initStory(root);
+  // Let the poster, fonts and text settle before downloading the sequence.
+  if (document.readyState === 'complete') run();
+  else addEventListener('load', run, { once: true });
+</script>

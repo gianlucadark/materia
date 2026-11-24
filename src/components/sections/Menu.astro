@@ -1,0 +1,47 @@
+---
+import { services } from '../../config/services';
+import { pathways } from '../../config/pathways';
+import { editorial } from '../../config/editorial';
+const { menu } = editorial;
+---
+
+<section class="menu" id="menu" aria-labelledby="menu-title">
+  <div class="menu-card">
+    <header class="menu-head">
+      <p class="kicker">{menu.label}</p>
+      <h2 id="menu-title">{menu.title}</h2>
+      <p>{menu.intro}</p>
+    </header>
+    <div class="menu-course">
+      <h3>{menu.cartaLabel}</h3>
+      <dl>
+        {
+          services.map((item) => (
+            <div>
+              <dt>{item.title}</dt>
+              <dd>{item.text}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+    <div class="menu-course menu-paths">
+      <h3>{menu.pathsLabel}</h3>
+      <div class="menu-path-list">
+        {
+          pathways.map((path) => (
+            <article id={path.id} aria-labelledby={`${path.id}-titolo`}>
+              <p class="menu-path-focus">{path.focus}</p>
+              <h4 id={`${path.id}-titolo`}>{path.title}</h4>
+              <p>{path.text}</p>
+              <a class="text-link" href="#prenota">
+                {menu.pathAction}
+              </a>
+            </article>
+          ))
+        }
+      </div>
+      <p class="menu-note">{menu.note}</p>
+    </div>
+  </div>
+</section>

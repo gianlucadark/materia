@@ -1,0 +1,40 @@
+---
+import Brand from '../ui/Brand.astro';
+import { branding } from '../../config/branding';
+---
+
+<header class="masthead" id="inizio">
+  <Brand />
+  <nav class="desktop-nav" aria-label="Navigazione principale">
+    {branding.nav.map((item) => <a href={item.href}>{item.label}</a>)}
+    <a class="nav-book" href="#prenota">{branding.bookingLabel}</a>
+  </nav>
+  <details class="mobile-nav">
+    <summary><span>Menu</span><i aria-hidden="true"></i></summary>
+    <nav aria-label="Navigazione mobile">
+      {branding.nav.map((item) => <a href={item.href}>{item.label}</a>)}
+      <a href="#prenota">{branding.bookingLabel}</a>
+    </nav>
+  </details>
+</header>
+<script>
+  const menu = document.querySelector<HTMLDetailsElement>('.mobile-nav');
+  menu?.addEventListener('click', (event) => {
+    if (event.target instanceof Element && event.target.closest('a'))
+      menu.open = false;
+  });
+  document.addEventListener('click', (event) => {
+    if (
+      menu?.open &&
+      event.target instanceof Node &&
+      !menu.contains(event.target)
+    )
+      menu.open = false;
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && menu?.open) {
+      menu.open = false;
+      menu.querySelector('summary')?.focus();
+    }
+  });
+</script>

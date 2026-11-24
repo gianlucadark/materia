@@ -1,0 +1,35 @@
+---
+import Plate from '../ui/Plate.astro';
+import { professional as p } from '../../config/professional';
+import { editorial } from '../../config/editorial';
+const [first, ...rest] = p.story;
+---
+
+<section class="letter" id="chi-sono" aria-labelledby="about-title">
+  <figure class="letter-plate">
+    <Plate image={p.photo} sizes="(max-width: 760px) 100vw, 38vw" />
+    <figcaption>{p.photoCaption}</figcaption>
+  </figure>
+  <div class="letter-body">
+    <p class="kicker">{editorial.about.label}</p>
+    <h2 id="about-title">{p.title}</h2>
+    <p class="letter-lead">{first}</p>
+    {rest.map((paragraph) => <p>{paragraph}</p>)}
+    <blockquote class="letter-quote"><p>{p.quote}</p></blockquote>
+    <p class="letter-closing">{p.closing}</p>
+    <p class="letter-sign">
+      <span class="letter-signature">{p.firstName}</span>
+      <span>{p.name}, {p.role.toLowerCase()}</span>
+      {p.demoNote && <span class="demo-tag">{p.demoNote}</span>}
+    </p>
+    {
+      p.qualifications.length > 0 && (
+        <ul class="credentials">
+          {p.qualifications.map((q) => (
+            <li>{q}</li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</section>

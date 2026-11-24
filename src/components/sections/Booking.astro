@@ -1,0 +1,40 @@
+---
+import Plate from '../ui/Plate.astro';
+import { contacts, appointmentLinks } from '../../config/contacts';
+import { editorial } from '../../config/editorial';
+const { booking } = editorial;
+const links = appointmentLinks(contacts);
+---
+
+<section class="finale" id="prenota" aria-labelledby="booking-title">
+  <figure class="finale-plate">
+    <Plate image={booking.image} sizes="100vw" />
+    <figcaption>{booking.caption}</figcaption>
+  </figure>
+  <div class="finale-text">
+    <p class="kicker">{booking.label}</p>
+    <h2 id="booking-title">{booking.title}</h2>
+    <p class="finale-lead">{booking.text}</p>
+    {
+      contacts.mode === 'demo' ? (
+        <details class="demo-booking">
+          <summary class="button">{booking.action}</summary>
+          <div class="booking-note" role="note">
+            <h3>{booking.demoTitle}</h3>
+            <p>{booking.demoText}</p>
+          </div>
+        </details>
+      ) : links.length ? (
+        <div class="contact-links">
+          {links.map((link) => (
+            <a class="button" href={link.href}>
+              {link.label}
+            </a>
+          ))}
+        </div>
+      ) : (
+        <p>{booking.liveEmpty}</p>
+      )
+    }
+  </div>
+</section>

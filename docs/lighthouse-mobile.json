@@ -1,0 +1,25 @@
+{
+  "lighthouseVersion": "13.6.0",
+  "fetchTime": "2026-11-24T16:46:26.828Z",
+  "formFactor": "mobile",
+  "throttlingMethod": "simulate",
+  "categories": {
+    "performance": 99,
+    "accessibility": 100,
+    "best-practices": 100,
+    "seo": 63
+  },
+  "metrics": {
+    "largest-contentful-paint": 2033.8602,
+    "cumulative-layout-shift": 0,
+    "total-blocking-time": 0,
+    "first-contentful-paint": 755.9068,
+    "speed-index": 755.9068
+  },
+  "failures": [
+    ["is-crawlable", "Page is blocked from indexing"],
+    ["image-delivery-insight", "Est savings of 30 KiB"],
+    ["network-dependency-tree-insight", "Network dependency tree"],
+    ["render-blocking-insight", "Est savings of 50 ms"]
+  ]
+}
